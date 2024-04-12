@@ -8,6 +8,7 @@ class AppConstants {
   // demo
   //  static const String baseUrl = 'https://cbapp.hartapps.com'; // Live
   static const String baseUrl = 'https://devadmin.hartapps.com'; // Dev
+  // static const String baseUrl = 'https://hwesushi-admin.hartapps.com'; //New  Dev
   // static const String baseUrl = String.fromEnvironment('BASE_URL', defaultValue: 'SOME_DEFAULT_VALUE');
   static const String configUri = '/api/v1/config';
   static const String loginUri = '/api/v1/auth/kitchen/login';

@@ -17,6 +17,7 @@ class CalculateAmountWidget extends StatelessWidget {
     double deliveryCharge = orderController.orderDetails.order.deliveryCharge?.toDouble() ?? 0;
     double couponDiscount = orderController.orderDetails.order.couponDiscountAmount?.toDouble() ?? 0;
     double extraDiscount = orderController.orderDetails.order.extraDiscount?.toDouble() ?? 0;
+    double serviceFee = orderController.orderDetails.order.serviceFee?.toDouble() ?? 0;
     double itemsPrice = 0;
     double discount = 0;
     double tax = 0;
@@ -54,7 +55,10 @@ class CalculateAmountWidget extends StatelessWidget {
      if(deliveryCharge > 0) CalculateItem(title: 'delivery_charge',amount: deliveryCharge),
       const CustomDivider(),
       const SizedBox(height: Dimensions.paddingSizeSmall),
-      CalculateItem(title: 'total',amount: total, isTotal: true),
+      CalculateItem(title: 'Sub total',amount: total, isTotal: true),
+      CalculateItem(title: 'Service fees',amount: serviceFee),
+      const CustomDivider(),
+      CalculateItem(title: 'Total',amount: total, isTotal: true),
     ],);
   }
 }

@@ -35,6 +35,7 @@ class Order {
   num? tax;
   num? deliveryCharge;
   num? extraDiscount;
+  num? serviceFee;
   String? customerName = "";
   String? customerPhone = "";
   String? deliveryDate;
@@ -51,6 +52,7 @@ class Order {
         this.couponDiscountAmount,
         this.tax,
         this.extraDiscount,
+        this.serviceFee,
         this.deliveryCharge,
         this.customerName,
         this.customerPhone,
@@ -97,6 +99,7 @@ class Order {
     orderStatus = json['order_status'];
     table = json['table'] != null ? Table.fromJson(json['table']) : null;
     tax = json['total_tax_amount'];
+    serviceFee = json['service_fee'];
     couponDiscountAmount = json['coupon_discount_amount'];
     extraDiscount = double.tryParse(json['extra_discount']);
     deliveryCharge = json['delivery_charge'];
