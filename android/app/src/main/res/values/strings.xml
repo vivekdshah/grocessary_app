@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="interfaceTextView">Select Interface</string>
+    <string name="lanCheckBox">LAN</string>
+    <string name="bluetoothCheckBox">Bluetooth</string>
+    <string name="usbCheckBox">USB</string>
+    <string name="empty"> </string>
+    <string name="discoveryButton">Start Discovering</string>
+    <string name="printingButton">Printing</string>
+    <string name="printer_setting">Printer Setting</string>
+    <string name="savePrinter">Save</string>
+
+</resources>

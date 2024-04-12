@@ -1,4 +1,4 @@
-package com.hartapps.cresskillbagel_kitchen.hwe_kitchenapp
+package com.hartapps.hwesushi_kitchen
 
 import io.flutter.embedding.android.FlutterActivity
 
