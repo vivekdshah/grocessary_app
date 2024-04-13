@@ -29,6 +29,7 @@ Future<void> main() async {
   if(!GetPlatform.isWeb) {
     HttpOverrides.global = MyHttpOverrides();
   }
+
   setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -39,7 +40,10 @@ Future<void> main() async {
       }
     });
   }
+
+  // Firebase setup done
   await Firebase.initializeApp();
+  // await Firebase.initializeApp(name: "firebase");
   Map<String, Map<String, String>> languages = await di.init();
 
   int? orderID;
@@ -51,6 +55,7 @@ Future<void> main() async {
             ? int.parse('${notificationAppLaunchDetails?.notificationResponse?.payload}') : null;
       }
       await NotificationHelper.initialize(flutterLocalNotificationsPlugin);
+      //Firebase background notification setup.....
      FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
     }
   }catch(e) {}

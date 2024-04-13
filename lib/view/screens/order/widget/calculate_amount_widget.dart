@@ -8,89 +8,142 @@ import 'package:efood_kitchen/view/base/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CalculateAmountWidget extends StatelessWidget {
+class CalculateAmountWidget extends StatefulWidget {
   final OrderController orderController;
-  const CalculateAmountWidget({Key? key, required this.orderController}) : super(key: key);
+
+  const CalculateAmountWidget({Key? key, required this.orderController})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    double deliveryCharge = orderController.orderDetails.order.deliveryCharge?.toDouble() ?? 0;
-    double couponDiscount = orderController.orderDetails.order.couponDiscountAmount?.toDouble() ?? 0;
-    double extraDiscount = orderController.orderDetails.order.extraDiscount?.toDouble() ?? 0;
-    double serviceFee = orderController.orderDetails.order.serviceFee?.toDouble() ?? 0;
-    double itemsPrice = 0;
-    double discount = 0;
-    double tax = 0;
-    double addOns = 0;
+  State<CalculateAmountWidget> createState() => _CalculateAmountWidgetState();
+}
 
-    for(Details orderDetails in orderController.orderDetails.details) {
+class _CalculateAmountWidgetState extends State<CalculateAmountWidget> {
+  double deliveryCharge = 0,
+      couponDiscount = 0,
+      extraDiscount = 0,
+      serviceFee = 0;
+  double itemsPrice = 0;
+  double discount = 0;
+  double tax = 0;
+  double addOns = 0;
+  double total = 0;
+
+  @override
+  void initState() {
+    deliveryCharge =
+        widget.orderController.orderDetails.order.deliveryCharge?.toDouble() ??
+            0;
+    couponDiscount = widget
+            .orderController.orderDetails.order.couponDiscountAmount
+            ?.toDouble() ??
+        0;
+    extraDiscount =
+        widget.orderController.orderDetails.order.extraDiscount?.toDouble() ??
+            0;
+    print(
+        "serviceFee11====${widget.orderController.orderDetails.order.serviceFee}");
+    serviceFee =
+        widget.orderController.orderDetails.order.serviceFee?.toDouble() ?? 0;
+
+    for (Details orderDetails in widget.orderController.orderDetails.details) {
       itemsPrice = itemsPrice + (orderDetails.price! * orderDetails.quantity!);
-      discount = discount + (orderDetails.discountOnProduct! * orderDetails.quantity!);
+      discount =
+          discount + (orderDetails.discountOnProduct! * orderDetails.quantity!);
       tax = orderDetails.globalTax ?? 0;
 
       List<int> ids = orderDetails.addOnIds ?? [];
 
-      if(ids.length == orderDetails.addOnPrices?.length &&
-          ids.length == orderDetails.addOnQtys?.length){
-        for(int i = 0; i < ids.length; i++){
-          addOns = addOns + (orderDetails.addOnPrices![i] * orderDetails.addOnQtys![i]);
+      if (ids.length == orderDetails.addOnPrices?.length &&
+          ids.length == orderDetails.addOnQtys?.length) {
+        for (int i = 0; i < ids.length; i++) {
+          addOns = addOns +
+              (orderDetails.addOnPrices![i] * orderDetails.addOnQtys![i]);
         }
       }
     }
 
-
-
-    double subTotal = itemsPrice + addOns - (discount + couponDiscount + extraDiscount);
+    double subTotal =
+        itemsPrice + addOns - (discount + couponDiscount + extraDiscount);
     tax = (subTotal * tax) / 100;
-    double total = subTotal + tax;
+    total = subTotal + tax;
 
-    return Column(children: [
-      CalculateItem(title: 'items_price',amount: itemsPrice),
-      CalculateItem(title: 'addons_price',amount: addOns),
-      CalculateItem(title: 'discount',amount: discount, isDiscount: true),
-      if(extraDiscount > 0) CalculateItem(title: 'extra_discount'.tr,amount: extraDiscount, isDiscount: true),
+    // TODO: implement initState
+    super.initState();
+  }
 
-      CalculateItem(title: 'vat_tax',amount: tax),
-      if(couponDiscount > 0) CalculateItem(title: 'coupon_discount',amount: couponDiscount, isDiscount: true),
-     if(deliveryCharge > 0) CalculateItem(title: 'delivery_charge',amount: deliveryCharge),
-      const CustomDivider(),
-      const SizedBox(height: Dimensions.paddingSizeSmall),
-      CalculateItem(title: 'Sub total',amount: total, isTotal: true),
-      CalculateItem(title: 'Service fees',amount: serviceFee),
-      const CustomDivider(),
-      CalculateItem(title: 'Total',amount: total, isTotal: true),
-    ],);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CalculateItem(title: 'items_price', amount: itemsPrice),
+        CalculateItem(title: 'addons_price', amount: addOns),
+        CalculateItem(title: 'discount', amount: discount, isDiscount: true),
+        if (extraDiscount > 0)
+          CalculateItem(
+              title: 'extra_discount'.tr,
+              amount: extraDiscount,
+              isDiscount: true),
+        CalculateItem(title: 'vat_tax', amount: tax),
+        if (couponDiscount > 0)
+          CalculateItem(
+              title: 'coupon_discount',
+              amount: couponDiscount,
+              isDiscount: true),
+        if (deliveryCharge > 0)
+          CalculateItem(title: 'delivery_charge', amount: deliveryCharge),
+        const CustomDivider(),
+        const SizedBox(height: Dimensions.paddingSizeSmall),
+        CalculateItem(title: 'Sub Total', amount: total, isTotal: true),
+        CalculateItem(title: 'Service Fee', amount: serviceFee),
+        const CustomDivider(),
+        CalculateItem(title: 'Total', amount: total, isTotal: true),
+      ],
+    );
   }
 }
+
 class CalculateItem extends StatelessWidget {
   final String title;
   final double amount;
   final bool isTotal;
   final bool isDiscount;
+
   const CalculateItem({
-    Key? key, required this.title, required this.amount,
-    this.isTotal = false, this.isDiscount = false,
+    Key? key,
+    required this.title,
+    required this.amount,
+    this.isTotal = false,
+    this.isDiscount = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final bool isSmall =  ResponsiveHelper.isSmallTab();
+    final bool isSmall = ResponsiveHelper.isSmallTab();
     return Padding(
-      padding:  EdgeInsets.only(
-        bottom: isSmall ?
-        Dimensions.paddingSizeExtraSmall : Dimensions.paddingSizeDefault,
+      padding: EdgeInsets.only(
+        bottom: isSmall
+            ? Dimensions.paddingSizeExtraSmall
+            : Dimensions.paddingSizeDefault,
       ),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        isTotal?
-        Text(title.tr, style: robotoBold.copyWith(fontSize: Dimensions.fontSizeExtraLarge)):
-        Text(title.tr, style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeLarge)),
-
-        isTotal?
-        Text(PriceConverter.convertPrice(context, amount),
-          style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge),
-        ):Text('${isDiscount ? '(-) ' : ''}${PriceConverter.convertPrice(context, amount)}',
-          style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeLarge),
-        ),
+        isTotal
+            ? Text(title.tr,
+                style: robotoBold.copyWith(
+                    fontSize: Dimensions.fontSizeExtraLarge))
+            : Text(title.tr,
+                style:
+                    robotoRegular.copyWith(fontSize: Dimensions.fontSizeLarge)),
+        isTotal
+            ? Text(
+                PriceConverter.convertPrice(context, amount),
+                style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge),
+              )
+            : Text(
+                '${isDiscount ? '(-) ' : ''}${PriceConverter.convertPrice(context, amount)}',
+                style:
+                    robotoRegular.copyWith(fontSize: Dimensions.fontSizeLarge),
+              ),
       ]),
     );
   }
