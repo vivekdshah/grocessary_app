@@ -32,7 +32,8 @@ class ApiClient extends GetxService {
 
   Future<Response> getData(String uri, {Map<String, dynamic>? query, Map<String, String>? headers}) async {
     try {
-      debugPrint('====> API Call: $uri\nToken: $token');
+      debugPrint('====> API Call: ${appBaseUrl! + uri}');
+      // debugPrint('====> Token: $token');
 
       http.Response response0 = await http.get(
         Uri.parse(appBaseUrl!+uri),
