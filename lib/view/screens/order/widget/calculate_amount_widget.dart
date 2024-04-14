@@ -44,7 +44,7 @@ class _CalculateAmountWidgetState extends State<CalculateAmountWidget> {
     print(
         "serviceFee11====${widget.orderController.orderDetails.order.serviceFee}");
     serviceFee =
-        widget.orderController.orderDetails.order.serviceFee?.toDouble() ?? 0;
+        double.parse(widget.orderController.orderDetails.order.serviceFee==null?"0":widget.orderController.orderDetails.order.serviceFee.toString()) ?? 0;
 
     for (Details orderDetails in widget.orderController.orderDetails.details) {
       itemsPrice = itemsPrice + (orderDetails.price! * orderDetails.quantity!);
@@ -66,7 +66,6 @@ class _CalculateAmountWidgetState extends State<CalculateAmountWidget> {
     double subTotal =
         itemsPrice + addOns - (discount + couponDiscount + extraDiscount);
     tax = (subTotal * tax) / 100;
-    total = subTotal + tax;
 
     // TODO: implement initState
     super.initState();
@@ -94,10 +93,10 @@ class _CalculateAmountWidgetState extends State<CalculateAmountWidget> {
           CalculateItem(title: 'delivery_charge', amount: deliveryCharge),
         const CustomDivider(),
         const SizedBox(height: Dimensions.paddingSizeSmall),
-        CalculateItem(title: 'Sub Total', amount: total, isTotal: true),
+        CalculateItem(title: 'Subtotal', amount: total, isTotal: true),
         CalculateItem(title: 'Service Fee', amount: serviceFee),
         const CustomDivider(),
-        CalculateItem(title: 'Total', amount: total, isTotal: true),
+        CalculateItem(title: 'Total', amount: total+ serviceFee, isTotal: true),
       ],
     );
   }

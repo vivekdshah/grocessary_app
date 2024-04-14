@@ -35,7 +35,7 @@ class Order {
   num? tax;
   num? deliveryCharge;
   num? extraDiscount;
-  num? serviceFee;
+  String? serviceFee;
   String? customerName = "";
   String? customerPhone = "";
   String? deliveryDate;
