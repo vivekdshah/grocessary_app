@@ -44,6 +44,7 @@ class PrinterAdapter(
 
     override fun getItemCount(): Int = printerList.size
 
+
     private fun clearSelections() {
         for (printer in printerList) {
             printer.isSelected = false

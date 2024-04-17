@@ -6,6 +6,7 @@
 //}
 package com.hartapps.hwesushi_kitchen
 
+
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -65,6 +66,7 @@ class MainActivity : FlutterActivity() {
             }
         }
     }
+
 
     private fun onPressPrintButton(orderDetailsModel: OrderDetailsModel) {
         val identifier = getPrinterIdentifier()

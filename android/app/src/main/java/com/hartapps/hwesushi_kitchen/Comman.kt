@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
+
 fun Double.formatToTwoDecimalPlaces(): String {
     return "%.2f".format(this)
 }

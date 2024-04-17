@@ -1,5 +1,6 @@
 package com.hartapps.hwesushi_kitchen
 
+
 data class OrderDetailsModel(
     val order: Order,
     val details: List<Details>

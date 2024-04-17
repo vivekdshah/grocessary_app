@@ -5,6 +5,7 @@ class AppConstants {
   static const String appName = 'Cresskill Bagel Kitchen';
   static const double appVersion = 1.5;
 
+
   // demo
   //  static const String baseUrl = 'https://cbapp.hartapps.com'; // Live
  // static const String baseUrl = 'https://devadmin.hartapps.com'; // Dev

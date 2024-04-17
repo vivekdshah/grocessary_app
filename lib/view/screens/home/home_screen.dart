@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
 
     super.initState();
     _tabController = TabController(
-      length: 4, initialIndex: !widget.fromFilter
+      length: 2, initialIndex: !widget.fromFilter
         ? 0: Get.find<OrderController>().currentIndex,vsync: this,
     );
 
