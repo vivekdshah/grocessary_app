@@ -1,4 +1,4 @@
-package com.hartapps.cresskillbagel_kitchen
+package com.hartapps.hwesushi_kitchen
 
 data class OrderDetailsModel(
     val order: Order,

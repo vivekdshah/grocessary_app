@@ -1,4 +1,4 @@
-package com.hartapps.cresskillbagel_kitchen
+package com.hartapps.hwesushi_kitchen
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import android.view.View
@@ -21,7 +20,7 @@ import com.starmicronics.stario10.StarDeviceDiscoveryManager
 import com.starmicronics.stario10.StarDeviceDiscoveryManagerFactory
 import com.starmicronics.stario10.StarPrinter
 import android.content.SharedPreferences
-import com.hartapps.hwesushi_kitchen.R
+
 class DiscoveryActivity: AppCompatActivity(), PrinterAdapter.OnPrinterSelectedListener {
     private var lanIsEnabled = true
     private var bluetoothIsEnabled = true

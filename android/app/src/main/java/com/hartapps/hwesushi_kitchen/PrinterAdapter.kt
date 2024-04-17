@@ -1,11 +1,11 @@
-package com.hartapps.cresskillbagel_kitchen
+package com.hartapps.hwesushi_kitchen
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
-import com.hartapps.hwesushi_kitchen.R
+
 class PrinterAdapter(
     private val printerList: List<PrinterModel>,
     private val onPrinterSelectedListener: OnPrinterSelectedListener

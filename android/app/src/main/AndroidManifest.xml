@@ -1,9 +1,18 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hartapps.hwesushi_kitchen"
+    >
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="hwe_kitchenapp"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
+        >
+        <activity
+            android:name="com.hartapps.hwesushi_kitchen.DiscoveryActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
