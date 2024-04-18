@@ -213,7 +213,7 @@ class MainActivity : FlutterActivity() {
                 .add(
                         PrinterBuilder()
                                 .styleMagnification(MagnificationParameter(2, 3))
-                                .actionPrintText("Cresskill Hot Bagel\n")
+                                .actionPrintText("Hwe Sarang Sushi\n")
                 )
                 .add(
                         PrinterBuilder()
@@ -320,13 +320,11 @@ class MainActivity : FlutterActivity() {
                 )
                 .add(
                         PrinterBuilder()
-                                .styleMagnification(MagnificationParameter(2, 2))
+                                .styleMagnification(MagnificationParameter(1, 1))
                                 .actionPrintText("Subtotal          $${calculateGrandSubTotal(orderDetailsModel)}\n")
                 )
-                .add(
-                        PrinterBuilder()
-                                .styleMagnification(MagnificationParameter(2, 2))
-                                .actionPrintText("ServiceFee          -$${orderDetailsModel.order.serviceFee}\n")
+                .actionPrintText(
+                        "Service fee                              $${convertStringToDouble(orderDetailsModel.order.serviceFee.toString())}\n"
                 )
                 .actionPrintText("\n---------------------------------------------\n")
                 .add(
@@ -339,7 +337,7 @@ class MainActivity : FlutterActivity() {
                 .styleAlignment(Alignment.Center)
                 .actionFeedLine(1)
                 .actionPrintQRCode(
-                        QRCodeParameter("https://hartapps.page.link/applinks\n")
+                        QRCodeParameter("https://hwesushi.hartapps.com/\n")
                                 .setLevel(QRCodeLevel.L)
                                 .setCellSize(8)
                 )
@@ -367,6 +365,13 @@ class MainActivity : FlutterActivity() {
         return result.toString()
     }
 
+    private fun convertStringToDouble(serviceFee: String):Double {
+//        val str = "123.4567" // Your string
+        val number = serviceFee.toDoubleOrNull() ?: 0.0 // Convert string to double, default to 0.0 if conversion fails
+        val formatted = String.format("%.2f", number) // Format double to display with 2 decimal places
+        println(formatted) // Output: 123.46
+        return formatted.toDouble();
+    }
     fun formatPhoneNumber(phoneNumber: String?): String {
         var formattedPhoneNumber = phoneNumber?.replace("US", "") ?: ""
         formattedPhoneNumber = formattedPhoneNumber?.replace("+1", "") ?: ""
