@@ -21,7 +21,7 @@ class OrderedProductList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeDefault),
       child: ListView.builder(
 
-        shrinkWrap: ResponsiveHelper.isMobile(context),
+        shrinkWrap:true,// ResponsiveHelper.isMobile(context),
         // physics:  const NeverScrollableScrollPhysics(),
         physics: ResponsiveHelper.isMobile(context) ? const NeverScrollableScrollPhysics() : const AlwaysScrollableScrollPhysics(),
         itemCount: orderController.orderDetails.details.length,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:my_printer_plugin/my_printer_plugin.dart';
+// import 'package:my_printer_plugin/my_printer_plugin.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _myPrinterPlugin = MyPrinterPlugin();
+  // final _myPrinterPlugin = MyPrinterPlugin();
 
   @override
   void initState() {

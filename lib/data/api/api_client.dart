@@ -5,6 +5,7 @@ import 'package:efood_kitchen/data/model/response/error_response.dart';
 import 'package:efood_kitchen/util/app_constants.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,8 +33,10 @@ class ApiClient extends GetxService {
 
   Future<Response> getData(String uri, {Map<String, dynamic>? query, Map<String, String>? headers}) async {
     try {
-      debugPrint('====> API Call: ${appBaseUrl! + uri}');
-      debugPrint('====> Token: $token');
+      // debugPrint('====> API Call: ${appBaseUrl! + uri}');
+      // debugPrint('====> Token: $token');
+      logger.i("URL==>${appBaseUrl! + uri.toString()}");
+      logger.i("Token==>$token");
 
       http.Response response0 = await http.get(
         Uri.parse(appBaseUrl!+uri),
@@ -47,12 +50,17 @@ class ApiClient extends GetxService {
       return const Response(statusCode: 1, statusText: noInternetMessage);
     }
   }
-
+  var logger = Logger(
+    level: Level.info,
+    printer: PrettyPrinter(methodCount: 0, noBoxingByDefault: false,lineLength: 10),
+  );
   Future<Response> postData(String? uri, dynamic body, {Map<String, String>? headers}) async {
     try {
-      debugPrint('====> API Call: $uri\nToken: $token');
-      debugPrint('====> API Body: $body');
-
+      // debugPrint('====> API Call: $uri\nToken: $token');
+      // debugPrint('====> API Body: $body');
+      logger.i("URL==>${appBaseUrl! + uri.toString()}");
+      logger.i("Token==>$token");
+      logger.t("Body==>$body");
       http.Response response = await http.post(
         Uri.parse(appBaseUrl!+uri!),
         body: jsonEncode(body),
@@ -66,9 +74,11 @@ class ApiClient extends GetxService {
 
   Future<Response> postMultipartData(String? uri, Map<String, String> body, List<MultipartBody> multipartBody, {Map<String, String>? headers}) async {
     try {
-      debugPrint('====> API Call: $uri\nToken: $token');
-      debugPrint('====> API Body: $body');
-
+      // debugPrint('====> API Call: $uri\nToken: $token');
+      // debugPrint('====> API Body: $body');
+      logger.i("URL==>${appBaseUrl! + uri.toString()}");
+      logger.i("Token==>$token");
+      logger.t("Body==>$body");
       http.MultipartRequest request = http.MultipartRequest('POST', Uri.parse(appBaseUrl!+uri!));
       request.headers.addAll(headers ?? _mainHeaders);
       for(MultipartBody multipart in multipartBody) {
@@ -96,9 +106,11 @@ class ApiClient extends GetxService {
 
   Future<Response> putData(String? uri, dynamic body, {Map<String, String>? headers}) async {
     try {
-      debugPrint('====> API Call: $uri\nToken: $token');
-      debugPrint('====> API Body: $body');
-
+      // debugPrint('====> API Call: $uri\nToken: $token');
+      // debugPrint('====> API Body: $body');
+      logger.i("URL==>${appBaseUrl! + uri.toString()}");
+      logger.i("Token==>$token");
+      logger.t("Body==>$body");
       http.Response response = await http.put(
         Uri.parse(appBaseUrl!+uri!),
         body: jsonEncode(body),
@@ -112,7 +124,9 @@ class ApiClient extends GetxService {
 
   Future<Response> deleteData(String? uri, {Map<String, String>? headers}) async {
     try {
-      debugPrint('====> API Call: $uri\nToken: $token');
+     // debugPrint('====> API Call: $uri\nToken: $token');
+      logger.i("URL==>${appBaseUrl! + uri.toString()}");
+      logger.i("Token==>$token");
 
       http.Response response = await http.delete(
         Uri.parse(appBaseUrl!+uri!),
@@ -131,6 +145,8 @@ class ApiClient extends GetxService {
     }catch(e) {
       debugPrint('handle response -$e');
     }
+    logger.f("API statusCode==>${response.statusCode}");
+    logger.f("API Response==>${response.body}");
     Response response0 = Response(
       body: body ?? response.body,
       bodyString: response.body.toString(), headers: response.headers, statusCode: response.statusCode, statusText: response.reasonPhrase,

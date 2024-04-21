@@ -37,6 +37,7 @@ dependencies:
   wakelock: ^0.6.2
   webview_flutter: ^4.2.0
   flutter_inappwebview: ^5.7.2+3
+  logger: ^2.2.0
 
   collection: any
 dev_dependencies:

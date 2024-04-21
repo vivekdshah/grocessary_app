@@ -7,6 +7,7 @@ import 'package:efood_kitchen/view/base/no_data_screen.dart';
 import 'package:efood_kitchen/view/screens/home/widget/status_change_custom_button.dart';
 import 'package:efood_kitchen/view/screens/order/widget/calculate_amount_widget.dart';
 import 'package:efood_kitchen/view/screens/order/widget/ordered_product_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,73 +36,71 @@ class _TabOrderDetailsWidgetState extends State<TabOrderDetailsWidget> {
         builder: (orderDetailsController) {
           return orderDetailsController.isDetails?
           const CustomLoader():
-          SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.only(
-                left: Dimensions.paddingSizeDefault,
-                right: Dimensions.paddingSizeDefault,
-                top: Dimensions.paddingSizeDefault,
-                bottom: 0,
-              ),
+          Container(
+            padding: const EdgeInsets.only(
+              left: Dimensions.paddingSizeDefault,
+              right: Dimensions.paddingSizeDefault,
+              top: Dimensions.paddingSizeDefault,
+              bottom: 0,
+            ),
 
-              child: Column(children: [
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
-                //   child: Text('order_summery'.tr, style: robotoMedium.copyWith(color: Theme.of(context).primaryColor,
-                //       fontSize: Dimensions.fontSizeLarge)),
-                // ),
-                orderDetailsController.isDetails? const SizedBox() :
-                Row(mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('${'order'.tr}# ${orderDetailsController.orderDetails.order.id.toString()}',style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeLarge),),
-                        Row(
-                          children: [
-                            orderDetailsController.orderDetails.order.table != null ?
-                            Text('${'table'.tr} ${orderDetailsController.orderDetails.order.table!.number!}',
-                                style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeLarge)):const SizedBox(),
-
-                            orderDetailsController.orderDetails.order.numberOfPeople > 0 ?
-                            Text(' | ${orderDetailsController.orderDetails.order.numberOfPeople} ${'people'.tr}') :
-                            const SizedBox(),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-               SizedBox(
-
-                   height:
-                   orderDetailsController.orderDetails.details.isEmpty?20:
-                   100,child: OrderedProductList(orderController: orderDetailsController)),
-
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
-                  child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
+              //   child: Text('order_summery'.tr, style: robotoMedium.copyWith(color: Theme.of(context).primaryColor,
+              //       fontSize: Dimensions.fontSizeLarge)),
+              // ),
+              orderDetailsController.isDetails? const SizedBox() :
+              Row(mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("${'note'.tr}: ", style: robotoBold),
-                      Expanded(child: Text(widget.orderNote, maxLines: 5,overflow: TextOverflow.clip,)),
+                      Text('${'order'.tr}# ${orderDetailsController.orderDetails.order.id.toString()}',style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeLarge),),
+                      Row(
+                        children: [
+                          orderDetailsController.orderDetails.order.table != null ?
+                          Text('${'table'.tr} ${orderDetailsController.orderDetails.order.table!.number!}',
+                              style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeLarge)):const SizedBox(),
+
+                          orderDetailsController.orderDetails.order.numberOfPeople > 0 ?
+                          Text(' | ${orderDetailsController.orderDetails.order.numberOfPeople} ${'people'.tr}') :
+                          const SizedBox(),
+                        ],
+                      ),
                     ],
                   ),
-                ),
+                ],
+              ),
+             Flexible(
+                 fit: FlexFit.loose,
+                 child: OrderedProductList(orderController: orderDetailsController)),
 
-                const CustomDivider(),
-                const SizedBox(height: Dimensions.paddingSizeDefault),
-                CalculateAmountWidget(orderController: orderDetailsController),
 
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: StatusChangeCustomButton(
-                    orderId: widget.orderId,
-                    orderStatus: widget.orderStatus,
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
+                child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${'note'.tr}: ", style: robotoBold),
+                    Expanded(child: Text(widget.orderNote, maxLines: 5,overflow: TextOverflow.clip,)),
+                  ],
                 ),
-              ],),),
-          );
+              ),
+
+              const CustomDivider(),
+              const SizedBox(height: Dimensions.paddingSizeDefault),
+              CalculateAmountWidget(orderController: orderDetailsController),
+
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: StatusChangeCustomButton(
+                  orderId: widget.orderId,
+                  orderStatus: widget.orderStatus,
+                ),
+              ),
+            ],),);
         }
     );
 

@@ -51,6 +51,7 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
               ),
 
               Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
 
                   Flexible(
@@ -100,7 +101,9 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
                                         ],
                                       ),
 
-                                      child: Column(children: [
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
                                         ClipPath(
                                           clipper: MovieTicketClipperPath(),
                                           child: Container(
@@ -118,7 +121,7 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
                                                   color: Theme
                                                       .of(context)
                                                       .highlightColor,
-                                                  padding: EdgeInsets.only(top: 0),
+                                                  padding: const EdgeInsets.only(top: 0),
                                                   child: Align(
                                                     alignment: Alignment.center,
                                                     child: TextButton.icon(
@@ -138,7 +141,8 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
                                               );
                                             }
                                         ),
-                                        Expanded(
+                                        Flexible(
+                                          fit: FlexFit.loose,
                                           child: orderController.isLoading ? const CustomLoader() : TabOrderDetailsWidget(
                                             orderId: orderController.orderId,
                                             orderStatus: orderController.orderStatus,

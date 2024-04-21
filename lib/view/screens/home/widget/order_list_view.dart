@@ -44,7 +44,7 @@ class OrderListView extends StatelessWidget {
                     crossAxisCount: ResponsiveHelper.isSmallTab() || isMobile ? 3 :  !ResponsiveHelper.isTab(context)  ? 2 : 4,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: ResponsiveHelper.isSmallTab() ? 0.7 : ResponsiveHelper.isTab(context) ? 0.85 : 1/1.35 ,
+                    childAspectRatio: ResponsiveHelper.isSmallTab() ? 0.7 : ResponsiveHelper.isTab(context) ? 0.75 : 1/1.35 ,
                   ),
                   padding: const EdgeInsets.all(0),
                   itemCount: orderList.length,

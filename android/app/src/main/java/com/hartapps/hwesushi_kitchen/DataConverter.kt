@@ -71,7 +71,7 @@ class DataConverter {
                 name = it["name"] as String?,
                 description = it["description"] as String?,
                 image = it["image"] as String?,
-                price = it["price"] as Double?,
+                price = convertToDouble(it["price"]),//it["price"] as Double?,
                 variations = (it["variations"] as List<Map<String, Any>>?)?.map { convertToOldVariation(it) },
                 addOns = (it["add_ons"] as List<Map<String, Any>>?)?.map { convertToAddOns(it) },
                 tax = it["tax"] as Double?,
