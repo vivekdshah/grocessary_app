@@ -74,9 +74,7 @@ class _TabOrderDetailsWidgetState extends State<TabOrderDetailsWidget> {
                   ),
                 ],
               ),
-             Flexible(
-                 fit: FlexFit.loose,
-                 child: OrderedProductList(orderController: orderDetailsController)),
+             OrderedProductList(orderController: orderDetailsController),
 
 
               Padding(

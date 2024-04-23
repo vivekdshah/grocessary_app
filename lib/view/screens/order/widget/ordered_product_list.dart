@@ -23,7 +23,8 @@ class OrderedProductList extends StatelessWidget {
 
         shrinkWrap:true,// ResponsiveHelper.isMobile(context),
         // physics:  const NeverScrollableScrollPhysics(),
-        physics: ResponsiveHelper.isMobile(context) ? const NeverScrollableScrollPhysics() : const AlwaysScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics() ,
+        //const AlwaysScrollableScrollPhysics(),
         itemCount: orderController.orderDetails.details.length,
         itemBuilder: (context, index) {
           String variationText = '';

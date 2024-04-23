@@ -30,7 +30,7 @@ class TabHomeScreen extends StatefulWidget {
   State<TabHomeScreen> createState() => _TabHomeScreenState();
 }
 
-
+screenHeight(context) => MediaQuery.of(context).size.height;
 
 class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProviderStateMixin {
 
@@ -42,6 +42,7 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
+    // print(screenHeight(context));
     return GetBuilder<OrderController>(
         builder: (orderController) {
           return Stack(
@@ -50,7 +51,7 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
                 showCart: true, isBackButtonExist: true, onBackPressed: null, icon: '',
               ),
 
-              Column(
+               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
 
@@ -101,57 +102,110 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
                                         ],
                                       ),
 
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                        ClipPath(
-                                          clipper: MovieTicketClipperPath(),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context).primaryColor,
+                                      child:
+
+                                      SingleChildScrollView(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ClipPath(
+                                              clipper: MovieTicketClipperPath(),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Theme.of(context).primaryColor,
+                                                ),
+                                                height: 13,
+                                              ),
                                             ),
-                                            height: 13,
-                                          ),
-                                        ),
-                                        GetBuilder<OrderController>(
-                                            builder: (orderDetailsController) {
-                                              return orderDetailsController.isDetails ?
-                                              Container() : Center(
-                                                child: Container(
-                                                  color: Theme
-                                                      .of(context)
-                                                      .highlightColor,
-                                                  padding: const EdgeInsets.only(top: 0),
-                                                  child: Align(
-                                                    alignment: Alignment.center,
-                                                    child: TextButton.icon(
-                                                      onPressed: () {
-                                                        // Add your print functionality here
-                                                        // For example, you can call a function to handle printing
-                                                        orderDetailsController.startPrinting();
-                                                      },
-                                                      icon: const Icon(Icons.print, size: 22),
-                                                      label: const Text(
-                                                        'Print',
-                                                        style: TextStyle(fontSize: 15),
+                                            GetBuilder<OrderController>(
+                                                builder: (orderDetailsController) {
+                                                  return orderDetailsController.isDetails ?
+                                                  Container() : Center(
+                                                    child: Container(
+                                                      color: Theme
+                                                          .of(context)
+                                                          .highlightColor,
+                                                      padding: const EdgeInsets.only(top: 0),
+                                                      child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: TextButton.icon(
+                                                          onPressed: () {
+                                                            // Add your print functionality here
+                                                            // For example, you can call a function to handle printing
+                                                            orderDetailsController.startPrinting();
+                                                          },
+                                                          icon: const Icon(Icons.print, size: 22),
+                                                          label: const Text(
+                                                            'Print',
+                                                            style: TextStyle(fontSize: 15),
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                        ),
-                                        Flexible(
-                                          fit: FlexFit.loose,
-                                          child: orderController.isLoading ? const CustomLoader() : TabOrderDetailsWidget(
-                                            orderId: orderController.orderId,
-                                            orderStatus: orderController.orderStatus,
-                                            orderNote: orderController.orderNote,
-                                          ),
-                                        ),
-
-
-                                      ],),
+                                                  );
+                                                }
+                                            ),
+                                            orderController.isLoading ? const CustomLoader() : TabOrderDetailsWidget(
+                                              orderId: orderController.orderId,
+                                              orderStatus: orderController.orderStatus,
+                                              orderNote: orderController.orderNote,
+                                            ),
+                                        
+                                        
+                                          ],),
+                                      )
+                                            //:
+                                      // Column(
+                                      //   mainAxisSize: MainAxisSize.min,
+                                      //   children: [
+                                      //   ClipPath(
+                                      //     clipper: MovieTicketClipperPath(),
+                                      //     child: Container(
+                                      //       decoration: BoxDecoration(
+                                      //         color: Theme.of(context).primaryColor,
+                                      //       ),
+                                      //       height: 13,
+                                      //     ),
+                                      //   ),
+                                      //   GetBuilder<OrderController>(
+                                      //       builder: (orderDetailsController) {
+                                      //         return orderDetailsController.isDetails ?
+                                      //         Container() : Center(
+                                      //           child: Container(
+                                      //             color: Theme
+                                      //                 .of(context)
+                                      //                 .highlightColor,
+                                      //             padding: const EdgeInsets.only(top: 0),
+                                      //             child: Align(
+                                      //               alignment: Alignment.center,
+                                      //               child: TextButton.icon(
+                                      //                 onPressed: () {
+                                      //                   // Add your print functionality here
+                                      //                   // For example, you can call a function to handle printing
+                                      //                   orderDetailsController.startPrinting();
+                                      //                 },
+                                      //                 icon: const Icon(Icons.print, size: 22),
+                                      //                 label: const Text(
+                                      //                   'Print',
+                                      //                   style: TextStyle(fontSize: 15),
+                                      //                 ),
+                                      //               ),
+                                      //             ),
+                                      //           ),
+                                      //         );
+                                      //       }
+                                      //   ),
+                                      //   Flexible(
+                                      //     fit: FlexFit.loose,
+                                      //     child: orderController.isLoading ? const CustomLoader() : TabOrderDetailsWidget(
+                                      //       orderId: orderController.orderId,
+                                      //       orderStatus: orderController.orderStatus,
+                                      //       orderNote: orderController.orderNote,
+                                      //     ),
+                                      //   ),
+                                      //
+                                      //
+                                      // ],),
                                     ),
                                   ));
                             }
