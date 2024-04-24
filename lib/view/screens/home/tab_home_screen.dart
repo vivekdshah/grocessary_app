@@ -17,6 +17,7 @@ import 'package:efood_kitchen/view/screens/home/widget/profile_dialog.dart';
 import 'package:efood_kitchen/view/screens/home/widget/tab_order_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'widget/order_list_view.dart';
@@ -63,15 +64,18 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
                               children: [
                                 SizedBox(height: MediaQuery.of(context).viewPadding.top + (ResponsiveHelper.isSmallTab() ? 50 : 90),),
 
-                                Row(
-                                  children: [
-                                    Expanded(child: SearchView(
-                                      searchEditController: widget.searchEditController,
-                                      tabController: widget.tabController,
-                                    )),
+                                SizedBox(
+                                  width: 280,
+                                  child: Row(
+                                    children: [
+                                      // Expanded(child: SearchView(
+                                      //   searchEditController: widget.searchEditController,
+                                      //   tabController: widget.tabController,
+                                      // )),
 
-                                    Expanded(child: OrderStatusTabBar(searchTextController: widget.searchEditController)),
-                                  ],
+                                      Expanded(child: OrderStatusTabBar(searchTextController: widget.searchEditController)),
+                                    ],
+                                  ),
                                 ),
 
                                 Flexible(child: OrderListView(tabController: widget.tabController!)),
@@ -87,6 +91,7 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
                               return Expanded(flex: 2,
                                   child: SafeArea(
                                     child: Container(
+                                      height: double.infinity,
                                       margin: const EdgeInsets.only(
                                         bottom: Dimensions.paddingSizeDefault,
                                         right: Dimensions.paddingSizeDefault,
@@ -150,7 +155,7 @@ class _TabHomeScreenState extends State<TabHomeScreen> with SingleTickerProvider
                                               orderStatus: orderController.orderStatus,
                                               orderNote: orderController.orderNote,
                                             ),
-                                        
+
                                         
                                           ],),
                                       )

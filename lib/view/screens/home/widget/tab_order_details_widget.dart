@@ -11,6 +11,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../helper/date_converter.dart';
+
 class TabOrderDetailsWidget extends StatefulWidget {
   final int  orderId;
   final String orderStatus;
@@ -74,6 +76,39 @@ class _TabOrderDetailsWidgetState extends State<TabOrderDetailsWidget> {
                   ),
                 ],
               ),
+                const SizedBox(height: Dimensions.paddingSizeExtraLarge),
+                Text(
+                  '${orderDetailsController.orderDetails.order.customerName}' '     ',
+                  style: robotoRegular.copyWith(
+                      fontSize: Dimensions.fontSizeLarge),
+                ),
+                Text(
+                  DateConverter.formatPhoneNumber(orderDetailsController.orderDetails.order.customerPhone) +'     ',
+                  style: robotoRegular.copyWith(
+                      fontSize: Dimensions.fontSizeLarge),
+                ),
+                // SizedBox(height: 15,),
+                const SizedBox(height: Dimensions.paddingSizeExtraLarge),
+                Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Expanded(
+                    child: Text('Scheduled For: ${DateConverter.isoStringTodateToDDMMMyyyy(orderDetailsController.orderDetails.order.deliveryDate!)} '
+                        '${DateConverter.convertTimeToTime(orderDetailsController.orderDetails.order.deliveryTime!)}',
+                      style: robotoMedium.copyWith(
+                          fontSize: Dimensions.fontSizeLarge),
+                    ),
+                  )
+                ]),
+                const SizedBox(height: 5),
+
+                Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Expanded(
+                    child: Text('Ordered At: ${DateConverter.isoStringToLocalDateOnly(orderDetailsController.orderDetails.order.createDate!)} '
+                        '${DateConverter.isoStringToLocalTimeOnly(orderDetailsController.orderDetails.order.createDate!)}',
+                      style: robotoRegular.copyWith(
+                          fontSize: Dimensions.fontSizeLarge),
+                    ),
+                  ),
+                ]),
              OrderedProductList(orderController: orderDetailsController),
 
 

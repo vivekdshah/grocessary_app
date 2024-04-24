@@ -13,6 +13,7 @@ class BookingStatusTabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 120,
       margin: MediaQuery.of(context).size.width > 650 && MediaQuery.of(context).size.width < 1200?
       const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall):
       const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
@@ -22,8 +23,10 @@ class BookingStatusTabItem extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(Dimensions.paddingSizeExtraSmall))
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+
         children: [
-          Text(title.tr, textAlign: TextAlign.center, style : robotoRegular.copyWith(fontSize: ResponsiveHelper.isSmallTab() ? Dimensions.fontSizeDefault : Dimensions.fontSizeSmall,
+          Text(title.tr, textAlign: TextAlign.center, style : robotoRegular.copyWith(fontSize: ResponsiveHelper.isSmallTab() ? Dimensions.fontSizeDefault :15,// Dimensions.fontSizeSmall,
               color: Get.find<OrderController>().selectedBookingStatus.name != title? Theme.of(context).textTheme.bodyLarge!.color: Colors.white))
           //Color(0xFF758590)
         ],
